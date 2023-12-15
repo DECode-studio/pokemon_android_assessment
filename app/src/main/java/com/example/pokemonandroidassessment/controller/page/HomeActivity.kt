@@ -10,6 +10,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.ListView
 import com.example.pokemonandroidassessment.R
+import com.example.pokemonandroidassessment.config.DatabaseHelper
 import com.example.pokemonandroidassessment.controller.adapter.ListAdapter
 import com.example.pokemonandroidassessment.controller.data.PokemonDataController
 import com.example.pokemonandroidassessment.model.PokemonModel
@@ -72,11 +73,16 @@ class HomeActivity : AppCompatActivity() {
 
         override fun onPostExecute(result: List<PokemonModel>?) {
             super.onPostExecute(result)
+            val db = DatabaseHelper(this.activity)
 
             listData = result!!
 
             listAdapter = ListAdapter(this.activity, R.layout.item_data, dataList())
             ls_data.adapter = listAdapter
+
+            listData.forEach { pokemon ->
+                db.addPokemon(pokemon)
+            }
         }
     }
 }
