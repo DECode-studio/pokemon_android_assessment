@@ -3,8 +3,10 @@ package com.example.pokemonandroidassessment.controller.page
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
+import com.bumptech.glide.Glide
 import com.example.pokemonandroidassessment.R
 import com.example.pokemonandroidassessment.controller.adapter.ListAbilityAdapter
 import com.example.pokemonandroidassessment.controller.adapter.ListFormAdapter
@@ -18,6 +20,7 @@ class DetailActivity : AppCompatActivity() {
     lateinit var pokemon : PokemonDetailModel
 
     private lateinit var txt_name: TextView
+    private lateinit var img_profile: ImageView
     private lateinit var ls_ability: ListView
     private lateinit var ls_form: ListView
 
@@ -28,6 +31,7 @@ class DetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_detail)
 
         txt_name  = findViewById(R.id.txt_name)
+        img_profile  = findViewById(R.id.img_profile)
         ls_ability = findViewById(R.id.ls_ability)
         ls_form = findViewById(R.id.ls_form)
 
@@ -55,6 +59,10 @@ class DetailActivity : AppCompatActivity() {
 
             listFormAdapter = ListFormAdapter(this.activity, R.layout.item_data, pokemon!!.forms!!)
             ls_form.adapter = listFormAdapter
+
+            Glide.with(activity)
+                .load(pokemon.sprites!!.frontDefault)
+                .into(img_profile)
         }
     }
 }
