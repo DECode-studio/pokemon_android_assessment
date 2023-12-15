@@ -53,7 +53,7 @@ data class PokemonDetailModel(
 	val id: Int? = null,
 
 	@field:SerializedName("forms")
-	val forms: List<FormsItem?>? = null,
+	val forms: List<FormsItem>? = null,
 
 	@field:SerializedName("height")
 	val height: Int? = null,
